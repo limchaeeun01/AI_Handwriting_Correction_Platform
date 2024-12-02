@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 손글씨 촬영 메뉴 (중앙 버튼) -->
+    <item
+        android:id="@+id/fragment_recording"
+        android:title="손글씨 촬영"
+        android:icon="@drawable/baseline_camera_alt_24"
+        android:enabled="false"
+        android:checkable="false" />
+</menu>

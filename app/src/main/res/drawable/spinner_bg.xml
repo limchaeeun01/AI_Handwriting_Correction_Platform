@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:exitFadeDuration="@android:integer/config_mediumAnimTime">
+
+    <!-- 눌렸을 때 -->
+    <item android:state_pressed="true">
+        <layer-list>
+            <!-- 내부 배경 -->
+            <item android:left="2dp" android:top="2dp" android:right="2dp" android:bottom="2dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="#C8E39A" /> <!-- 눌렸을 때 배경 색상 -->
+                    <corners android:radius="10dp" /> <!-- 동일한 둥근 각도 -->
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <!-- 기본 상태 -->
+    <item>
+        <layer-list>
+            <!-- 내부 배경 -->
+            <item android:left="2dp" android:top="2dp" android:right="2dp" android:bottom="2dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="#E0F4B9" /> <!-- 기본 배경 색상 -->
+                    <corners android:radius="10dp" /> <!-- 동일한 둥근 각도 -->
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

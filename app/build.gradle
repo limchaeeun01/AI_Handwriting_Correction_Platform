@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.chaeni__beam.ai_handwriting_correction_platform'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.chaeni__beam.ai_handwriting_correction_platform"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -32,15 +32,17 @@ android {
     }
     buildFeatures {
         viewBinding true
+        dataBinding true // 데이터 바인딩 활성화
     }
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
+    implementation 'androidx.databinding:databinding-runtime:8.1.2'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
