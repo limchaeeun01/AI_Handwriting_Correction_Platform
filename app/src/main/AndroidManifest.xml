@@ -13,6 +13,18 @@
         android:theme="@style/Theme.AI_Handwriting_Correction_Platform"
         tools:targetApi="31">
         <activity
+            android:name=".PictureActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DrawingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RecordingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RecordingOptionActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="false" />
         <activity

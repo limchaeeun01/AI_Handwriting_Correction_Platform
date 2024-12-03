@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.chaeni__beam.ai_handwriting_correction_platform.fragment.HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_basicsFragment"
+            app:destination="@id/basicsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_practiceFragment"
+            app:destination="@id/practiceFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/basicsFragment"
+        android:name="com.chaeni__beam.ai_handwriting_correction_platform.fragment.BasicsFragment"
+        tools:layout="@layout/fragment_basics" />
+
+    <fragment
+        android:id="@+id/practiceFragment"
+        android:name="com.chaeni__beam.ai_handwriting_correction_platform.fragment.PracticeFragment"
+        tools:layout="@layout/fragment_practice" />
+</navigation>

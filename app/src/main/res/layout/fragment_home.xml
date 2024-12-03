@@ -86,6 +86,7 @@
                             android:layout_width="240dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
+                            android:src="@drawable/vector69"
                             />
 
                     </LinearLayout>
@@ -165,6 +166,7 @@
                     android:textSize="16sp"/>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/basicsBtn"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
                     android:layout_marginTop="20dp"
@@ -216,6 +218,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/practiceBtn"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
                     android:layout_marginTop="20dp"

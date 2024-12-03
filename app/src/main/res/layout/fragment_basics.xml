@@ -20,7 +20,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="190dp"
                 android:background="#FBEEE1"
                 android:orientation="horizontal">
 
@@ -32,6 +32,7 @@
                     android:layout_weight="4">
 
                     <ImageView
+                        android:id="@+id/backBtn"
                         android:layout_width="26dp"
                         android:layout_height="26dp"
                         android:src="@drawable/back_icon"/>
@@ -95,12 +96,12 @@
                     android:layout_marginTop="20dp"
                     android:textSize="13sp"
                     android:fontFamily="@font/pretendard_medium"
-                    android:lineHeight="20dp"
+                    android:lineHeight="25dp"
                     android:textColor="#555555"
-                    android:text="엄지, 검지, 중지로 연필을 가볍게 집듯이 잡으세요.\n
-중지의 첫번째 마디로 연필의 아랫부분을 살며시 받치세요.\n
-주먹은 달걀 쥐는 듯한 정도의 공간을 유지하세요.\n
-연필쥔 손의 새끼 손가락을 바닥에 가볍게 대세요"/>
+                    android:text=" - 엄지, 검지, 중지로 연필을 가볍게 집듯이 잡으세요.\n
+- 중지의 첫번째 마디로 연필의 아랫부분을 살며시 받치세요.\n
+- 주먹은 달걀 쥐는 듯한 정도의 공간을 유지하세요.\n
+- 연필쥔 손의 새끼 손가락을 바닥에 가볍게 대세요"/>
 
 
             </LinearLayout>
@@ -135,11 +136,11 @@
                     android:layout_marginTop="20dp"
                     android:textSize="13sp"
                     android:fontFamily="@font/pretendard_medium"
-                    android:lineHeight="20dp"
+                    android:lineHeight="25dp"
                     android:textColor="#555555"
-                    android:text="몸을 곧게 펴고 책상과 몸 사이에 주먹 하나 정도의 간격을 두고 앉으세요.\n
-머리는 가운데로 살짝 숙이고 눈과 종이의 간격을 유지해요.\n
-글씨를 쓸 종이는 몸과 일직선, 한가운데 오도록 두세요."/>
+                    android:text=" - 몸을 곧게 펴고 책상과 몸 사이에 주먹 하나 정도의 간격을 두고 앉으세요.\n
+- 머리는 가운데로 살짝 숙이고 눈과 종이의 간격을 유지해요.\n
+- 글씨를 쓸 종이는 몸과 일직선, 한가운데 오도록 두세요."/>
 
 
             </LinearLayout>
