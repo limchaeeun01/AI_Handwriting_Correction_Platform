@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".PictureActivity">
 
+    <ImageView
+        android:id="@+id/pictureArea"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="80dp"
+        android:scaleType="centerCrop"/>
+
     <FrameLayout
         android:id="@+id/persistent_bottom_sheet"
         android:layout_width="match_parent"
@@ -13,7 +20,7 @@
         android:orientation="vertical"
         android:background="#00FFFFFF"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        app:behavior_peekHeight="150dp">
+        app:behavior_peekHeight="200dp">
 
         <TextView
             android:layout_width="90dp"
@@ -29,8 +36,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="40dp"
+            android:padding="20dp"
             android:background="#FBF7EF"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ocrResultText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="안녕하세요."
+                android:textColor="@color/black"
+                android:textSize="24sp"/>
 
 
         </LinearLayout>
@@ -58,6 +74,7 @@
             android:src="@drawable/question_icon" />
 
         <FrameLayout
+            android:id="@+id/recordingBtn"
             android:layout_width="0dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
