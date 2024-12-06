@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="80dp"
-        android:scaleType="centerCrop"/>
+        android:scaleType="fitCenter"/>
 
     <FrameLayout
         android:id="@+id/persistent_bottom_sheet"
@@ -33,6 +33,7 @@
             android:fontFamily="@font/pretendard_semibold"/>
 
         <LinearLayout
+            android:id="@+id/captureArea"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="40dp"
@@ -41,12 +42,20 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/loadingText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="AI가 글씨를 교정중이에요."
+                android:textColor="@color/point_green"
+                android:textSize="17sp"
+                android:visibility="gone"/>
+
+            <TextView
                 android:id="@+id/ocrResultText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="안녕하세요."
                 android:textColor="@color/black"
-                android:textSize="24sp"/>
+                android:textSize="22sp"/>
 
 
         </LinearLayout>

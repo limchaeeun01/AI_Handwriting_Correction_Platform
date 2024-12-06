@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.chaeni__beam.ai_handwriting_correction_platform.FontViewModel
 import com.chaeni__beam.ai_handwriting_correction_platform.R
 import com.chaeni__beam.ai_handwriting_correction_platform.adapter.SpinnerAdapter
 import com.chaeni__beam.ai_handwriting_correction_platform.databinding.FragmentHomeBinding
@@ -14,6 +16,8 @@ import com.chaeni__beam.ai_handwriting_correction_platform.databinding.FragmentH
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+
+    private lateinit var fontViewModel: FontViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +29,9 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        val data = arrayOf("Spring", "Summer", "Fall", "Winter")
+        fontViewModel = ViewModelProvider(requireActivity()).get(FontViewModel::class.java)
+
+        val data = arrayOf("돋움체", "굴림체", "바탕체")
         val adapter = SpinnerAdapter(requireContext(), data)
 
         binding.spinner.adapter = adapter
@@ -36,16 +42,19 @@ class HomeFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                // 안전하게 처리
-                view?.let {
-                    // 필요시 작업 수행
-                }
+                val selectedFont = parent?.getItemAtPosition(position).toString()
+                fontViewModel.selectedFont = selectedFont  // ViewModel에 값 저장
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 // 필요 시 처리
             }
         }
+
+        // ViewModel에서 선택된 폰트 값 읽기
+        val selectedFont = fontViewModel.selectedFont
+        val position = data.indexOf(selectedFont)
+        binding.spinner.setSelection(position)
 
         binding.basicsBtn.setOnClickListener {
             // Fragment 교체
@@ -62,7 +71,6 @@ class HomeFragment : Fragment() {
                 .addToBackStack(null)  // 백스택에 추가하여 뒤로 가기 버튼으로 이전 Fragment로 돌아갈 수 있게 함
                 .commit()
         }
-
 
 
         return binding.root
