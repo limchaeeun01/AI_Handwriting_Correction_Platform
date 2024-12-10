@@ -192,7 +192,7 @@ class PictureActivity : AppCompatActivity() {
 
         // 서버에 POST 요청
         val request = Request.Builder()
-            .url("http://192.168.200.106:8080/api/handwriting/ocr")
+            .url("http://192.168.200.106:8080/api/handwriting/test")
             .post(requestBody)
             .build()
 

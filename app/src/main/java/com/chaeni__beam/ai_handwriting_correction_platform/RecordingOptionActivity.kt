@@ -19,6 +19,10 @@ class RecordingOptionActivity : AppCompatActivity() {
             startActivity(Intent(this, PictureActivity::class.java))
         }
 
+        binding.drawingOptionBtn.setOnClickListener{
+            startActivity(Intent(this, DrawingActivity::class.java))
+        }
+
 
     }
 }
