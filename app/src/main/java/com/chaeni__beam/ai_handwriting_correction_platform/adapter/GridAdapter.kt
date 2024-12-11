@@ -10,10 +10,10 @@ import android.widget.TextView
 class GridAdapter(private val text: String, private val cellSize: Int) : BaseAdapter() {
 
     private val gridData: List<String> = text.chunked(1).toMutableList().apply {
-        while (size < 40) add("") // 40개의 셀을 유지
+        while (size < 35) add("") // 35개의 셀을 유지
     }
 
-    override fun getCount(): Int = 40
+    override fun getCount(): Int = 35
 
     override fun getItem(position: Int): Any = gridData[position]
 

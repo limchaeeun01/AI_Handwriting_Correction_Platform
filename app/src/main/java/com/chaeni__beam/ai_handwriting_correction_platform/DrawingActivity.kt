@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.chaeni__beam.ai_handwriting_correction_platform.databinding.ActivityDrawingBinding
 import okhttp3.Call
@@ -36,6 +37,12 @@ class DrawingActivity : AppCompatActivity() {
             processAndSendComparison()
         }
 
+        binding.resetBtn.setOnClickListener {
+            binding.drawingBoardView.clearCanvas() // 그림판 초기화 메서드 호출
+            Toast.makeText(this, "그림판이 초기화되었습니다.", Toast.LENGTH_SHORT).show()
+        }
+
+
         // DrawingBoardView 크기 조정
         adjustDrawingBoardViewSize()
 
@@ -49,7 +56,7 @@ class DrawingActivity : AppCompatActivity() {
         // View가 완전히 준비된 후 크기를 조정하는 방법
         drawingBoardView.post {
             val screenWidth = drawingBoardView.width
-            val screenHeight = (screenWidth * 10) / 8
+            val screenHeight = (screenWidth * 15) / 7
 
             // 높이를 계산하여 설정
             val layoutParams = drawingBoardView.layoutParams
@@ -75,9 +82,17 @@ class DrawingActivity : AppCompatActivity() {
 
     // drawingBoardView의 전체를 캡처하는 함수
     fun captureView(view: View): Bitmap {
-        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        // 캡쳐할 높이를 절반으로 설정
+        val halfHeight = view.height / 3
+
+        // 절반 높이의 비트맵 생성
+        val bitmap = Bitmap.createBitmap(view.width, halfHeight, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
-        view.draw(canvas) // 뷰를 비트맵으로 캡처
+
+        // View의 상단 절반만 캡쳐
+        canvas.clipRect(0, 0, view.width, halfHeight)
+        view.draw(canvas)
+
         return bitmap
     }
 
@@ -102,7 +117,6 @@ class DrawingActivity : AppCompatActivity() {
         val client = OkHttpClient()
         handwrittenImageFile = imageFile // 전송된 파일을 전역 변수에 저장
 
-        binding.loadingText.visibility = View.VISIBLE
 
         // 이미지 파일을 서버로 전송할 MultipartBody 구성
         val requestBody = MultipartBody.Builder()
@@ -138,17 +152,15 @@ class DrawingActivity : AppCompatActivity() {
                         if (responseBody != null) {
                             Log.d("test", responseBody)
                             // OCR 결과가 텍스트라면, TextView에 표시
-                            binding.ocrResultText.text = responseBody
-                            binding.loadingText.visibility = View.GONE
 
-                            val recognizedText: String = responseBody
+                            // recognizedText와 이미지 경로를 Intent에 담아 전달
                             val intent = Intent(this@DrawingActivity, GridActivity::class.java)
-                            intent.putExtra("recognizedText", recognizedText)
+                            intent.putExtra("recognizedText", responseBody) // OCR 결과
+                            intent.putExtra("imagePath", imageFile.absolutePath) // 이미지 경로
                             startActivity(intent)
                         } else {
                             // 서버에서 받은 내용이 없을 경우 오류 처리
                             Log.d("test", "Empty response body")
-                            binding.loadingText.visibility = View.GONE
                         }
                     }
                 } else {
@@ -156,55 +168,6 @@ class DrawingActivity : AppCompatActivity() {
                     runOnUiThread {
                         // UI 업데이트: 오류 메시지 표시
                         Log.d("test", "OCR 처리 오류: ${response.code}")
-                        binding.loadingText.visibility = View.GONE
-                    }
-                }
-            }
-        })
-    }
-
-    // '/apo/correction' 엔드포인트
-    private fun sendComparisonImages(handwrittenImage: File) {
-        val client = OkHttpClient()
-
-        // File을 Multipart로 변환
-        val handwrittenMultipart = MultipartBody.Part.createFormData(
-            "handwrittenImage",
-            handwrittenImage.name,
-            handwrittenImage.asRequestBody("image/*".toMediaTypeOrNull())
-        )
-
-        // MultipartBody 구성
-        val requestBody = MultipartBody.Builder()
-            .setType(MultipartBody.FORM)
-            .addPart(handwrittenMultipart)
-            .build()
-
-        // 서버 요청
-        val request = Request.Builder()
-            .url("http://192.168.200.106:8080/api/handwriting/correction")
-            .post(requestBody)
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                e.printStackTrace()
-                runOnUiThread {
-                    Log.e("NetworkError", "서버 전송 실패: ${e.message}")
-                }
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                runOnUiThread {
-                    if (response.isSuccessful) {
-                        val responseBody = response.body?.string()
-                        if (responseBody != null) {
-                            Log.d("ServerResponse", "비교 결과: $responseBody")
-                        } else {
-                            Log.e("ServerError", "응답이 비어 있음")
-                        }
-                    } else {
-                        Log.e("ServerError", "응답 실패: ${response.code}")
                     }
                 }
             }

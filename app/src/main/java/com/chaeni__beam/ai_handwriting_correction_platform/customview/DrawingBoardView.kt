@@ -29,8 +29,8 @@ class DrawingBoardView(context: Context, attrs: AttributeSet) : View(context, at
     private val paths = mutableListOf<Pair<Path, Paint>>()
 
     // 원고지 그리드 관련 변수
-    var rowCount = 10  // 행 수
-    var columnCount = 8  // 열 수
+    var rowCount = 15  // 행 수
+    var columnCount = 7  // 열 수
     private val gridRectangles = mutableListOf<RectF>()
 
     override fun onDraw(canvas: Canvas) {
@@ -113,4 +113,12 @@ class DrawingBoardView(context: Context, attrs: AttributeSet) : View(context, at
         val emptyBitmap = Bitmap.createBitmap(bitmap.width, bitmap.height, bitmap.config)
         return bitmap.sameAs(emptyBitmap)
     }
+
+    // DrawingBoardView에 초기화 메서드 추가
+    fun clearCanvas() {
+        paths.clear()      // 저장된 경로 초기화
+        drawPath.reset()   // 현재 그리는 경로 초기화
+        invalidate()       // 화면 갱신
+    }
+
 }

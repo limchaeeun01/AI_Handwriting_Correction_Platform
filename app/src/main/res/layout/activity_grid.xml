@@ -1,24 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GridActivity">
 
-    <GridView
-        android:id="@+id/gridView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="8"
-        android:stretchMode="columnWidth"
-        android:gravity="center" />
+        android:gravity="center"
+        android:orientation="vertical">
 
+        <GridView
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="7"
+            android:stretchMode="columnWidth"
+            android:gravity="center" />
 
-    <Button
-        android:id="@+id/captureButton"
+        <ImageView
+            android:id="@+id/capturedImageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/persistent_bottom_sheet"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="캡쳐" />
-</LinearLayout>
+        android:layout_height="700dp"
+        android:orientation="vertical"
+        android:background="#00FFFFFF"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:behavior_peekHeight="150dp">
+
+        <TextView
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bottom_sheet_style"
+            android:text="AI 교정"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/pretendard_semibold"/>
+
+        <LinearLayout
+            android:id="@+id/captureArea"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            android:padding="20dp"
+            android:background="#FBF7EF"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/writedText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_semibold"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:text="안녕하세요" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/navi_background"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"/>
+
+            <TextView
+                android:id="@+id/loadingText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="AI가 글씨를 교정중이에요."
+                android:textColor="@color/point_green"
+                android:textSize="17sp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/resultText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_light"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:lineSpacingExtra="5dp"/>
+
+
+        </LinearLayout>
+    </FrameLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
