@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.chaeni__beam.ai_handwriting_correction_platform.adapter.GridAdapter
 import com.chaeni__beam.ai_handwriting_correction_platform.databinding.ActivityGridBinding
 import okhttp3.Call
@@ -23,6 +24,7 @@ import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 
 class GridActivity : AppCompatActivity() {
@@ -34,6 +36,11 @@ class GridActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityGridBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        val selectedFont = intent.getStringExtra("selectedFont") ?: "돋움체" // 기본값 설정
+        Log.d("GridActivity", "Received selectedFont: $selectedFont")
+
 
         recognizedText = intent.getStringExtra("recognizedText")
         Log.d("GridActivity", "Received recognizedText: $recognizedText")
@@ -48,7 +55,7 @@ class GridActivity : AppCompatActivity() {
         }
 
         // GridView 초기화
-        setupGrid()
+        setupGrid(selectedFont)
 
         // GridView 로드 완료 후 서버 전송 작업 시작
         binding.gridView.post {
@@ -67,7 +74,7 @@ class GridActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupGrid() {
+    private fun setupGrid(selectedFont: String) {
         binding.gridView.numColumns = 7 // 7열 고정
 
         val displayMetrics = resources.displayMetrics
@@ -79,8 +86,10 @@ class GridActivity : AppCompatActivity() {
         binding.gridView.horizontalSpacing = 1
 
         // GridView 어댑터 설정
-        val adapter = GridAdapter(recognizedText ?: "", cellSize)
+        val adapter = GridAdapter(this, recognizedText ?: "", cellSize, selectedFont)
         binding.gridView.adapter = adapter
+
+        binding.gridView.invalidate()
     }
 
     private fun captureGrid(): File {
@@ -115,20 +124,28 @@ class GridActivity : AppCompatActivity() {
             }
             return
         }
-        val gridImageFile = captureGrid()
-        sendImagesToServer(gridImageFile, capturedImagePath)
 
+        // 공백 제거 처리
+        val sanitizedText = recognizedText!!.replace("\\s".toRegex(), "") // 모든 공백 제거
+        Log.d("SanitizedText", "Sanitized recognizedText: $sanitizedText")
+
+        val gridImageFile = captureGrid()
+        sendImagesToServer(gridImageFile, capturedImagePath, sanitizedText)
     }
 
+    private fun sendImagesToServer(gridImageFile: File, capturedImagePath: String, sanitizedText: String) {
+        val client = OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(60, TimeUnit.SECONDS)
+            .build()
 
-    private fun sendImagesToServer(gridImageFile: File, capturedImagePath: String) {
-        val client = OkHttpClient()
         val gridImageRequestBody = gridImageFile.asRequestBody("image/png".toMediaTypeOrNull())
         val capturedImageFile = File(capturedImagePath)
         val capturedImageRequestBody = capturedImageFile.asRequestBody("image/png".toMediaTypeOrNull())
-        val textRequestBody = recognizedText?.toRequestBody("text/plain".toMediaTypeOrNull())
-            ?: "default_value".toRequestBody("text/plain".toMediaTypeOrNull())
+        val textRequestBody = sanitizedText.toRequestBody("text/plain".toMediaTypeOrNull())
 
+        binding.loadingSpinner.visibility = View.VISIBLE
         binding.loadingText.visibility = View.VISIBLE
 
         val requestBody = MultipartBody.Builder()
@@ -146,6 +163,7 @@ class GridActivity : AppCompatActivity() {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
+                    binding.loadingSpinner.visibility = View.GONE
                     binding.loadingText.visibility = View.GONE
                     Toast.makeText(this@GridActivity, "서버 전송 실패: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
@@ -153,13 +171,16 @@ class GridActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call, response: Response) {
                 runOnUiThread {
+                    binding.loadingSpinner.visibility = View.GONE
                     binding.loadingText.visibility = View.GONE
                 }
                 if (response.isSuccessful) {
                     val responseBody = response.body?.string()
-                    val feedback = extractFeedback(responseBody)
+                    if (responseBody != null) {
+                        Log.d("test", responseBody)
+                    }
                     runOnUiThread {
-                        binding.resultText.text = feedback
+                        binding.resultText.text = responseBody
                     }
                 } else {
                     runOnUiThread {
@@ -169,6 +190,7 @@ class GridActivity : AppCompatActivity() {
             }
         })
     }
+
 
     private fun extractFeedback(responseBody: String?): String {
         return try {

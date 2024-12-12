@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    tools:context=".SentenceWritingActivity">
+
+    <ScrollView
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:background="#FBF7EF"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
+                    android:orientation="vertical"
+                    android:layout_weight="4">
+
+                    <ImageView
+                        android:id="@+id/backBtn"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:src="@drawable/back_icon"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="문장 쓰기"
+                        android:fontFamily="@font/pretendard_semibold"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="20dp"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="글자와 띄어쓰기 간격을 염두하고 글씨를 일정하게 문장으로 쓰는 법을 연습해요."
+                        android:fontFamily="@font/pretendard_light"
+                        android:textColor="#555555"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:padding="60dp"
+                    android:src="@drawable/practice_icon3"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:layout_marginBottom="80dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="자음과 모음의 모양을 올바르게 잡고, 글씨의 크기와 간격을 일정하게 맞춰 내 마음에 드는 글을 써보세요."
+                    android:fontFamily="@font/pretendard_light"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="짧은 문장 연습:"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"/>
+
+
+                <LinearLayout
+                    android:id="@+id/shortPracticeBtn1"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/spinner_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="내가 마음에 드는 글을 예쁜 글씨체로 쓰고 싶다."
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:letterSpacing="0.05"
+                        android:fontFamily="@font/pretendard_medium"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/spinner_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="때로는 질문은 복잡하지만 해답은 간단할 수도 있다."
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:letterSpacing="0.05"
+                        android:fontFamily="@font/pretendard_medium"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/spinner_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="항상 변화한다는 사실만 변하지 않을 뿐이다."
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:letterSpacing="0.05"
+                        android:fontFamily="@font/pretendard_medium"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="깔끔하고 반듯이 써졌다면 더 긴 문장을 써보는걸 시도해봐요. "
+                    android:fontFamily="@font/pretendard_light"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="긴 문장 연습:"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/spinner_bg"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="난 가끔 낮보다 밤이 더 활기 넘치고 풍부한 색감을 가지고 있다고 생각한다."
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:letterSpacing="0.05"
+                        android:fontFamily="@font/pretendard_medium"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/spinner_bg"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="결국 모든 것은 괜찮아질 것이다, 만약 그렇지 않다면, 끝이 아니다."
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:letterSpacing="0.05"
+                        android:fontFamily="@font/pretendard_medium"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

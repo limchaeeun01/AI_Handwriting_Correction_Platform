@@ -29,8 +29,8 @@ class DrawingBoardView(context: Context, attrs: AttributeSet) : View(context, at
     private val paths = mutableListOf<Pair<Path, Paint>>()
 
     // 원고지 그리드 관련 변수
-    var rowCount = 15  // 행 수
-    var columnCount = 7  // 열 수
+    private var rowCount = 15  // 초기 행 수
+    private var columnCount = 7  // 초기 열 수
     private val gridRectangles = mutableListOf<RectF>()
 
     override fun onDraw(canvas: Canvas) {
@@ -121,4 +121,14 @@ class DrawingBoardView(context: Context, attrs: AttributeSet) : View(context, at
         invalidate()       // 화면 갱신
     }
 
+    // 행과 열 수를 동적으로 설정하는 메서드
+    fun setGridSize(rows: Int, columns: Int) {
+        if (rows > 0 && columns > 0) {
+            rowCount = rows
+            columnCount = columns
+            invalidate() // 화면 갱신
+        } else {
+            throw IllegalArgumentException("행과 열 수는 0보다 커야 합니다.")
+        }
+    }
 }

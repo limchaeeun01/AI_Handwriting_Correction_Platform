@@ -29,9 +29,14 @@ class DrawingActivity : AppCompatActivity() {
 
     private lateinit var handwrittenImageFile: File
 
+    private lateinit var selectedFont: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDrawingBinding.inflate(layoutInflater)
+
+        selectedFont = intent.getStringExtra("selectedFont") ?: "돋움체" // 기본값 설정
+        Log.d("DrawingActivity", "Received selectedFont: $selectedFont")
 
         binding.recordingBtn.setOnClickListener {
             processAndSendComparison()
@@ -157,6 +162,7 @@ class DrawingActivity : AppCompatActivity() {
                             val intent = Intent(this@DrawingActivity, GridActivity::class.java)
                             intent.putExtra("recognizedText", responseBody) // OCR 결과
                             intent.putExtra("imagePath", imageFile.absolutePath) // 이미지 경로
+                            intent.putExtra("selectedFont", selectedFont) // 선택된 폰트를 전달
                             startActivity(intent)
                         } else {
                             // 서버에서 받은 내용이 없을 경우 오류 처리

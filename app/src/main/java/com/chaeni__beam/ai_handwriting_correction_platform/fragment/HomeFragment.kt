@@ -29,12 +29,23 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        fontViewModel = ViewModelProvider(requireActivity()).get(FontViewModel::class.java)
+        fontViewModel = ViewModelProvider(
+            requireActivity(), ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
+        ).get(FontViewModel::class.java)
+
 
         val data = arrayOf("돋움체", "굴림체", "바탕체")
         val adapter = SpinnerAdapter(requireContext(), data)
 
         binding.spinner.adapter = adapter
+
+        // Spinner의 초기 값을 ViewModel에 저장된 값으로 설정
+        val selectedFont = fontViewModel.selectedFont
+        val position = data.indexOf(selectedFont)
+        if (position >= 0) {
+            binding.spinner.setSelection(position)
+        }
+
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -42,8 +53,8 @@ class HomeFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                val selectedFont = parent?.getItemAtPosition(position).toString()
-                fontViewModel.selectedFont = selectedFont  // ViewModel에 값 저장
+                val selectedFont = parent.getItemAtPosition(position).toString()
+                fontViewModel.selectedFont = selectedFont // ViewModel에 값 저장
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -51,10 +62,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-        // ViewModel에서 선택된 폰트 값 읽기
-        val selectedFont = fontViewModel.selectedFont
-        val position = data.indexOf(selectedFont)
-        binding.spinner.setSelection(position)
 
         binding.basicsBtn.setOnClickListener {
             // Fragment 교체

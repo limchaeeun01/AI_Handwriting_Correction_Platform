@@ -75,7 +75,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_marginTop="20dp"
                     android:elevation="10dp"
                     app:cardCornerRadius="8dp">
@@ -117,7 +117,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
-                            android:padding="55dp"
+                            android:padding="50dp"
                             android:src="@drawable/practice_icon1"
                             android:scaleType="centerCrop"
                             android:contentDescription="Sample Image" />
@@ -126,7 +126,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_marginTop="20dp"
                     android:elevation="10dp"
                     app:cardCornerRadius="8dp">
@@ -167,7 +167,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
-                            android:padding="55dp"
+                            android:padding="45dp"
                             android:src="@drawable/practice_icon2"
                             android:scaleType="centerCrop"
                             android:contentDescription="Sample Image" />
@@ -175,8 +175,9 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/sentenceWritingBtn"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_marginTop="20dp"
                     android:elevation="10dp"
                     app:cardCornerRadius="8dp">
@@ -217,7 +218,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
-                            android:padding="55dp"
+                            android:padding="50dp"
                             android:src="@drawable/practice_icon3"
                             android:scaleType="centerCrop"
                             android:contentDescription="Sample Image" />
@@ -226,7 +227,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     android:elevation="10dp"
@@ -268,7 +269,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
-                            android:padding="55dp"
+                            android:padding="50dp"
                             android:src="@drawable/practice_icon4"
                             android:scaleType="centerCrop"
                             android:contentDescription="Sample Image" />
